@@ -9,3 +9,18 @@ cp ../CMakeLists.txt .
 cmake .
 make
 echo "ready to go"
+
+#bin - https://phoenixnap.com/kb/install-apache-zookeeper . https://phoenixnap.com/kb/install-apache-zookeeper
+cd /opt
+sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.6.4/apache-zookeeper-3.6.4-bin.tar.gz
+sudo tar -xvf apache-zookeeper-3.6.4-bin.tar.gz
+cd apache-zookeeper-3.6.4-bin
+
+
+#install zookeeper
+sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.6.4/apache-zookeeper-3.6.4.tar.gz
+sudo tar -xvf apache-zookeeper-3.6.4.tar.gz
+cd apache-zookeeper-3.6.4
+sudo apt install maven
+mvn -pl zookeeper-jute compile
+#or cd zookeeper-juite cd zookeeper-release-3.6.2/zookeeper-jute/; mvn compile
