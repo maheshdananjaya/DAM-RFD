@@ -24,3 +24,14 @@ cd apache-zookeeper-3.6.4
 sudo apt install maven
 mvn -pl zookeeper-jute compile
 #or cd zookeeper-juite cd zookeeper-release-3.6.2/zookeeper-jute/; mvn compile
+
+
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar -xvf apache-maven-3.6.3-bin.tar.gz
+mv apache-maven-3.6.3 /opt/
+
+#add to bashrc
+#M2_HOME='/opt/apache-maven-3.6.3'
+#PATH="$M2_HOME/bin:$PATH"
+#export PATH
+
