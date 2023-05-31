@@ -26,8 +26,10 @@ cd zookeeper/zookeeper-jute && mvn compile
 # 3.complie zookeeper-client-c
 cd ../zookeeper-client/zookeeper-client-c
 autoreconf -if
-./configure
-make -j16
+./configure --prefix=/usr/blocal
+#make -j16
+sudo make install
+
 
 #maven
 #https://phoenixnap.com/kb/install-maven-on-ubuntu
