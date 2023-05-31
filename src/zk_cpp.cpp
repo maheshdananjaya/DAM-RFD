@@ -309,7 +309,7 @@ zoo_rc      zk_cpp::get_node(const char* path, std::string& out_value, zoo_state
 
 zoo_rc      zk_cpp::set_node(const char* path, const std::string& value, int32_t version) {
     //return (zoo_rc)zoo_aset((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), version);
-    return (zoo_rc)zoo_aset((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), version);
+    return (zoo_rc)zoo_set((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), version);
 }
 
 zoo_rc      zk_cpp::get_children(const char* path, std::vector<std::string>& children, bool watch) {
