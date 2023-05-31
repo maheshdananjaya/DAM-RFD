@@ -219,7 +219,8 @@ zoo_rc      zk_cpp::create_node(const char* path, const std::string& value, cons
     }
     acl_v.data = acl_list;
 
-    zoo_rc rt = (zoo_rc)zoo_acreate((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), &acl_v, create_flags, path_buffer, (int)path_buffer_len);
+    //zoo_rc rt = (zoo_rc)zoo_acreate((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), &acl_v, create_flags, path_buffer, (int)path_buffer_len);
+    zoo_rc rt = (zoo_rc)zoo_create((zhandle_t*)m_zh, path, value.c_str(), (int)value.size(), &acl_v, create_flags, path_buffer, (int)path_buffer_len);
 
     if (acl_list != NULL) {
         delete[]acl_list;
@@ -251,13 +252,15 @@ zoo_rc      zk_cpp::create_sequance_ephemeral_node(const char* path, const std::
 }
 
 zoo_rc      zk_cpp::delete_node(const char* path, int32_t version) {
-    return (zoo_rc)zoo_adelete((zhandle_t*)m_zh, path, version);
+    //return (zoo_rc)zoo_adelete((zhandle_t*)m_zh, path, version);
+    return (zoo_rc)zoo_delete((zhandle_t*)m_zh, path, version);
 }
 
 zoo_rc      zk_cpp::exists_node(const char* path, zoo_state_t* info, bool watch) {
     struct Stat s = { 0 };
 
-    zoo_rc rt = (zoo_rc)zoo_aexists((zhandle_t*)m_zh, path, (int)watch, &s);
+    //zoo_rc rt = (zoo_rc)zoo_aexists((zhandle_t*)m_zh, path, (int)watch, &s);
+    zoo_rc rt = (zoo_rc)zoo_exists((zhandle_t*)m_zh, path, (int)watch, &s);
 
     if (info) {
         details::state_to_zoo_state_t(s, info);
@@ -272,7 +275,8 @@ zoo_rc      zk_cpp::get_node(const char* path, std::string& out_value, zoo_state
     char buf[zoo_value_buf_len] = { 0 };
     int buf_size = sizeof(buf);
     char *data_buffer = buf;
-    zoo_rc rt = (zoo_rc)zoo_aget((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
+    //zoo_rc rt = (zoo_rc)zoo_aget((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
+    zoo_rc rt = (zoo_rc)zoo_get((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
     do {
         if (rt != z_ok) {
             break;
@@ -282,7 +286,8 @@ zoo_rc      zk_cpp::get_node(const char* path, std::string& out_value, zoo_state
         if (s.dataLength > buf_size) {
             data_buffer = (char*)malloc(s.dataLength + 1);
             buf_size = s.dataLength;
-            rt = (zoo_rc)zoo_aget((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
+            //rt = (zoo_rc)zoo_aget((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
+            rt = (zoo_rc)zoo_get((zhandle_t*)m_zh, path, watch, data_buffer, &buf_size, &s);
             if (rt != z_ok) {
                 break;
             }
@@ -308,7 +313,8 @@ zoo_rc      zk_cpp::set_node(const char* path, const std::string& value, int32_t
 
 zoo_rc      zk_cpp::get_children(const char* path, std::vector<std::string>& children, bool watch) {
     String_vector string_v;
-    zoo_rc rt = (zoo_rc)zoo_aget_children((zhandle_t*)m_zh, path, watch, &string_v);
+    //zoo_rc rt = (zoo_rc)zoo_aget_children((zhandle_t*)m_zh, path, watch, &string_v);
+    zoo_rc rt = (zoo_rc)zoo_get_children((zhandle_t*)m_zh, path, watch, &string_v);
     if (rt != z_ok) {
         return rt;
     }
@@ -335,7 +341,8 @@ zoo_rc      zk_cpp::set_acl(const char* path, const std::vector<zoo_acl_t>& acl,
     }
     acl_v.data = acl_list;
 
-    zoo_rc rt = (zoo_rc)zoo_aset_acl((zhandle_t*)m_zh, path, version, &acl_v);
+    //zoo_rc rt = (zoo_rc)zoo_aset_acl((zhandle_t*)m_zh, path, version, &acl_v);
+    zoo_rc rt = (zoo_rc)zoo_set_acl((zhandle_t*)m_zh, path, version, &acl_v);
 
     if (acl_list != NULL) {
         delete[]acl_list;
@@ -347,7 +354,8 @@ zoo_rc      zk_cpp::set_acl(const char* path, const std::vector<zoo_acl_t>& acl,
 zoo_rc      zk_cpp::get_acl(const char* path, std::vector<zoo_acl_t>& acl) {
     struct ACL_vector acl_v = { 0 };
 
-    zoo_rc ret = (zoo_rc)zoo_aget_acl((zhandle_t*)m_zh, path, &acl_v, NULL);
+    //zoo_rc ret = (zoo_rc)zoo_aget_acl((zhandle_t*)m_zh, path, &acl_v, NULL);
+    zoo_rc ret = (zoo_rc)zoo_get_acl((zhandle_t*)m_zh, path, &acl_v, NULL);
 
     if (ret == z_ok) {
         for (int32_t i = 0; i < acl_v.count; ++i) {
