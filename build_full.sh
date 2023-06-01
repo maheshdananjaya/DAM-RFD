@@ -5,11 +5,11 @@
 cd /opt
 sudo wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
 sudo tar -xvf apache-maven-3.8.8-bin.tar.gz
-cd 
+cd
 #https://issues.apache.org/jira/browse/ZOOKEEPER-4621
 cd /opt/apache-maven-3.8.8/bin && export PATH=$PWD:$PATH && cd
 
-#zookeeper bin for the server- replicated or not
+#zookeeper bin
 cd /opt
 wget https://dlcdn.apache.org/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1-bin.tar.gz
 tar -xvf apache-zookeeper-3.7.1-bin.tar.gz
@@ -30,9 +30,17 @@ wget https://dlcdn.apache.org/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1.t
 tar -xvf apache-zookeeper-3.7.1.tar.gz
 mv apache-zookeeper-3.7.1 zookeeper
 
+#configs- for bins
+#mv zoo.cfg zookeeper/config/zoo.cfg
+#mkdir /data/z1
+#mkdir /data/z2
+#mkdir /data/z3
 #CPPUNITS
-sudo apt-get install libcppunit-dev
 
+
+
+#build zooekkeeper for client c++
+sudo apt-get install libcppunit-dev
 #cd /opt
 # 2.compile jute to generate "zookeeper.jute.h/c" under "../zookeeper-client/zookeeper-client-c/generated/"
 cd zookeeper/zookeeper-jute && mvn compile
@@ -43,7 +51,6 @@ autoreconf -if
 #make -j16
 sudo make install
 
-
 #maven
 #https://phoenixnap.com/kb/install-maven-on-ubuntu
 #dding zookeeper dep
@@ -51,4 +58,5 @@ sudo make install
 
 
 #zookeeper install as bin
-#https://phoenixnap.com/kb/install-apache-zookeeper
+#https://phoenixnap.com/kb/install-apache-zookeeper                                                                                                                                                                     1,23          Top
+
