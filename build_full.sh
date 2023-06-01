@@ -19,9 +19,16 @@ cd
 mv zoo.cfg zookeeper/config/zoo.cfg
 mv zoo.cfg zookeeper/config/zoo.cfg
 mv zoo.cfg zookeeper/config/zoo.cfg
+
 mkdir /data/z1
 mkdir /data/z2
 mkdir /data/z3
+
+#running commands
+cd /opt/zookeeper
+sudo bin/zkServer.sh --config conf/zoo_1 start #-foreground
+sudo bin/zkServer.sh --config conf/zoo_2 start #-foreground
+sudo bin/zkServer.sh --config conf/zoo_3 start #-foreground
 #CPPUNITS
 
 
