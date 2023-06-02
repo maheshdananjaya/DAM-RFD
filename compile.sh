@@ -5,7 +5,7 @@ cd src/
 LDFLAGS=''
 
 g++ -g -Wall  -DTHREADED -DHAVE_OPENSSL_H  -I /usr/blocal/include/zookeeper -I /users/maheshd/DAM-RFD/src -L /usr/blocal/lib/zookeeper -o zk-client  zk_cpp_test.cpp zk_cpp.cpp -lzookeeper_mt
-
+g++ -o test_uset  test_uset.cpp
 #LDFLAGS=''
 #g++ -g -Wall  -DTHREADED -DHAVE_OPENSSL_H  -I /usr/blocal/include/zookeeper -I /users/maheshd/DAM-RFD/src -L /usr/blocal/lib/zookeeper -o zk-client  zk_cpp_test.cpp zk_cpp.cpp -lzookeeper_mt
 
